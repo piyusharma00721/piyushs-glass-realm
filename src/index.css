@@ -27,7 +27,7 @@ All colors MUST be HSL. */
     --muted: 222 16% 18%;
     --muted-foreground: 215 16% 72%;
 
-    --accent: 55 100% 60%; /* neon yellow */
+    --accent: 0 80% 58%; /* subtle red accent */
     --accent-foreground: 222 16% 10%;
 
     --destructive: 0 84% 60%;
@@ -50,9 +50,9 @@ All colors MUST be HSL. */
     --sidebar-ring: 210 100% 56%;
 
     /* Design embellishments */
-    --gradient-hero: radial-gradient(1200px 600px at 10% 10%, hsl(var(--primary) / 0.25), transparent),
-                     radial-gradient(1000px 500px at 90% 20%, hsl(var(--secondary) / 0.25), transparent),
-                     radial-gradient(900px 500px at 50% 90%, hsl(var(--accent) / 0.22), transparent);
+    --gradient-hero: radial-gradient(1200px 600px at 10% 10%, hsl(var(--primary) / 0.12), transparent),
+                     radial-gradient(1000px 500px at 90% 20%, hsl(var(--secondary) / 0.10), transparent),
+                     radial-gradient(900px 500px at 50% 90%, hsl(var(--accent) / 0.10), transparent);
     --shadow-elegant: 0 12px 30px -10px hsl(var(--primary) / 0.25);
     --shadow-glow: 0 0 40px hsl(var(--primary) / 0.35);
     --shadow-neon: 0 0 28px hsl(var(--secondary) / 0.45);
@@ -78,7 +78,7 @@ All colors MUST be HSL. */
     --muted: 222 16% 16%;
     --muted-foreground: 215 16% 70%;
 
-    --accent: 55 100% 60%;
+    --accent: 0 80% 58%;
     --accent-foreground: 222 16% 8%;
 
     --destructive: 0 70% 40%;
