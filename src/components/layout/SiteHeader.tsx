@@ -11,9 +11,9 @@ const SiteHeader = () => {
         </Link>
         <div className="flex items-center gap-3">
           <a
-            href="mailto:hello@piyush.dev"
+            href="#contact"
             className="nav-link text-sm opacity-90 hover:opacity-100"
-            aria-label="Email Piyush"
+            aria-label="Go to contact form"
           >
             <span className="inline-flex items-center gap-2"><Mail className="opacity-80" /> Email</span>
           </a>
