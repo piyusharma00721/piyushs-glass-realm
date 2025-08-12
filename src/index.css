@@ -61,6 +61,7 @@ All colors MUST be HSL. */
     --neon-green: 150 92% 50%;
     --neon-blue: 210 100% 56%;
     --neon-yellow: 55 100% 60%;
+  }
 
   .dark {
     --background: 0 0% 0%; /* pure black */
