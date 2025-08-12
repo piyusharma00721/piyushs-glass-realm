@@ -5,7 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SiteHeader from "@/components/layout/SiteHeader";
 import Index from "./pages/Index";
-import NotFound from "./pages/NotFound";
+
 
 const queryClient = new QueryClient();
 
@@ -18,8 +18,6 @@ const App = () => (
         <SiteHeader />
         <Routes>
           <Route path="/" element={<Index />} />
-          {/* Keep a minimal catch-all just in case */}
-          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
