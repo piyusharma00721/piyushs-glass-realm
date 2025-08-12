@@ -76,6 +76,7 @@ const GlassBackground = ({ className = "" }: { className?: string }) => {
       aria-hidden
       ref={containerRef}
       className={cn("pointer-events-none fixed inset-0 -z-10 overflow-hidden", className)}
+      style={{ backgroundColor: "#000" }}
     >
       {/* Animated neon orbs on pure black background with parallax wrappers */}
       <div ref={blueWrap} style={{ position: "absolute", inset: 0 }}>

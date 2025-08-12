@@ -160,18 +160,18 @@ All colors MUST be HSL. */
 
   @keyframes orb-drift-1 {
     0% { transform: translate3d(0, 0, 0) scale(1); }
-    50% { transform: translate3d(12vw, -8vh, 0) scale(1.05); }
-    100% { transform: translate3d(-6vw, 10vh, 0) scale(1); }
+    50% { transform: translate3d(6vw, -4vh, 0) scale(1.04); }
+    100% { transform: translate3d(-4vw, 5vh, 0) scale(1); }
   }
   @keyframes orb-drift-2 {
     0% { transform: translate3d(0, 0, 0) scale(1); }
-    50% { transform: translate3d(-10vw, 6vh, 0) scale(1.04); }
-    100% { transform: translate3d(8vw, -6vh, 0) scale(1); }
+    50% { transform: translate3d(-5vw, 4vh, 0) scale(1.03); }
+    100% { transform: translate3d(4vw, -4vh, 0) scale(1); }
   }
   @keyframes orb-drift-3 {
     0% { transform: translate3d(0, 0, 0) scale(1); }
-    50% { transform: translate3d(6vw, 10vh, 0) scale(1.06); }
-    100% { transform: translate3d(-8vw, -8vh, 0) scale(1); }
+    50% { transform: translate3d(4vw, 6vh, 0) scale(1.05); }
+    100% { transform: translate3d(-5vw, -5vh, 0) scale(1); }
   }
 
   /* Convenience alias */
