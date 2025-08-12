@@ -7,6 +7,10 @@ const GlassBackground = ({ className = "" }: { className?: string }) => {
   const redWrap = useRef<HTMLDivElement | null>(null);
   const greenWrap = useRef<HTMLDivElement | null>(null);
   const yellowWrap = useRef<HTMLDivElement | null>(null);
+  const blueOrb = useRef<HTMLDivElement | null>(null);
+  const redOrb = useRef<HTMLDivElement | null>(null);
+  const greenOrb = useRef<HTMLDivElement | null>(null);
+  const yellowOrb = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     let raf: number | null = null;
@@ -52,23 +56,41 @@ const GlassBackground = ({ className = "" }: { className?: string }) => {
     };
   }, []);
 
-  const pick = <T,>(arr: readonly T[]) => arr[Math.floor(Math.random() * arr.length)];
-  const rand = (min: number, max: number) => Math.random() * (max - min) + min;
-  const buildAnim = (
-    name: string,
-    duration: number,
-    delay: number,
-    direction: "alternate" | "alternate-reverse"
-  ) => `${name} ${duration}s ease-in-out ${delay}s infinite ${direction}`;
+  // Auto-move orbs with smooth looping paths using rAF
+  useEffect(() => {
+    let raf: number | null = null;
+    const start = performance.now();
 
-  const orbAnims = useMemo(() => {
-    const names = ["orb-drift-1", "orb-drift-2", "orb-drift-3"] as const;
-    return {
-      blue: buildAnim(pick(names), Math.round(rand(24, 40)), 0, pick(["alternate", "alternate-reverse"])),
-      red: buildAnim(pick(names), Math.round(rand(24, 40)), 2, pick(["alternate", "alternate-reverse"])),
-      green: buildAnim(pick(names), Math.round(rand(24, 40)), 4, pick(["alternate", "alternate-reverse"])),
-      yellow: buildAnim(pick(names), Math.round(rand(24, 40)), 6, pick(["alternate", "alternate-reverse"]))
+    // Randomized path params for each orb
+    const params = [
+      { el: blueOrb, ax: 0.35, ay: 0.28, sx: 0.00012, sy: 0.00016, px: Math.random() * Math.PI * 2, py: Math.random() * Math.PI * 2 },
+      { el: redOrb, ax: 0.30, ay: 0.34, sx: 0.00010, sy: 0.00014, px: Math.random() * Math.PI * 2, py: Math.random() * Math.PI * 2 },
+      { el: greenOrb, ax: 0.32, ay: 0.26, sx: 0.00014, sy: 0.00011, px: Math.random() * Math.PI * 2, py: Math.random() * Math.PI * 2 },
+      { el: yellowOrb, ax: 0.28, ay: 0.30, sx: 0.00011, sy: 0.00013, px: Math.random() * Math.PI * 2, py: Math.random() * Math.PI * 2 },
+    ];
+
+    const loop = (t: number) => {
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      const cx = w * 0.5;
+      const cy = h * 0.5;
+      const size = 520; // orb size from CSS
+
+      for (const p of params) {
+        const time = t - start;
+        const x = cx + Math.sin(time * p.sx + p.px) * (w * p.ax) - size / 2;
+        const y = cy + Math.cos(time * p.sy + p.py) * (h * p.ay) - size / 2;
+        const el = p.el.current;
+        if (el) {
+          el.style.transform = `translate3d(${x.toFixed(2)}px, ${y.toFixed(2)}px, 0)`;
+        }
+      }
+
+      raf = requestAnimationFrame(loop);
     };
+
+    raf = requestAnimationFrame(loop);
+    return () => { if (raf) cancelAnimationFrame(raf); };
   }, []);
 
   return (
@@ -80,16 +102,16 @@ const GlassBackground = ({ className = "" }: { className?: string }) => {
     >
       {/* Animated neon orbs on pure black background with parallax wrappers */}
       <div ref={blueWrap} style={{ position: "absolute", inset: 0 }}>
-        <div className="orb orb--blue" style={{ top: "-10%", left: "-10%", animation: orbAnims.blue }} />
+        <div ref={blueOrb} className="orb orb--blue" style={{ animation: "none" }} />
       </div>
       <div ref={redWrap} style={{ position: "absolute", inset: 0 }}>
-        <div className="orb orb--red" style={{ top: "20%", right: "-12%", animation: orbAnims.red }} />
+        <div ref={redOrb} className="orb orb--red" style={{ animation: "none" }} />
       </div>
       <div ref={greenWrap} style={{ position: "absolute", inset: 0 }}>
-        <div className="orb orb--green" style={{ bottom: "-12%", left: "28%", animation: orbAnims.green }} />
+        <div ref={greenOrb} className="orb orb--green" style={{ animation: "none" }} />
       </div>
       <div ref={yellowWrap} style={{ position: "absolute", inset: 0 }}>
-        <div className="orb orb--yellow" style={{ top: "60%", right: "18%", animation: orbAnims.yellow }} />
+        <div ref={yellowOrb} className="orb orb--yellow" style={{ animation: "none" }} />
       </div>
     </div>
   );

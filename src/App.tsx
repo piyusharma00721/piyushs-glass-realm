@@ -5,7 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SiteHeader from "@/components/layout/SiteHeader";
 import Index from "./pages/Index";
-
+import GlassBackground from "@/components/visual/GlassBackground";
 
 const queryClient = new QueryClient();
 
@@ -15,6 +15,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <GlassBackground />
         <SiteHeader />
         <Routes>
           <Route path="/" element={<Index />} />
