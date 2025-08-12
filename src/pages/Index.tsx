@@ -3,8 +3,10 @@ import { Button } from "@/components/ui/button";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { setPageSEO } from "@/lib/seo";
 import { BadgeCheck, Cpu, Layers, MessageSquareCode, Rocket, Bike } from "lucide-react";
-import { useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { ProjectCard, type Project } from "@/components/cards/ProjectCard";
+import { useTilt } from "@/hooks/use-tilt";
+import { useToast } from "@/components/ui/use-toast";
 
 const projects: Project[] = [
   {
@@ -47,13 +49,12 @@ const skillIcon = (name: string) => {
 };
 
 const milestones = [
-  { year: "10th", text: "Started schooling journey" },
-  { year: "12th", text: "Completed schooling • Celebrate 🎉" },
-  { year: "BCA Year 1", text: "Began BCA" },
-  { year: "BCA Year 2", text: "Deepened CS fundamentals" },
-  { year: "BCA Year 3", text: "Graduated BCA • Celebrate 🎉" },
-  { year: "MCA Year 1 (AI)", text: "Specialized in AI" },
-  { year: "MCA Year 2", text: "Completed MCA • Celebrate 🎉" },
+  { year: "10th Class", text: "Year of 10th — tap for details" },
+  { year: "12th Class", text: "Year of 12th — tap for details" },
+  { year: "BCA (Bachelor’s)", text: "Duration: 3 years" },
+  { year: "MCA (AI)", text: "Duration: 2 years" },
+  { year: "Company A", text: "Role — Duration" },
+  { year: "Company B", text: "Role — Duration" },
 ];
 
 const Index = () => {
