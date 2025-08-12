@@ -53,53 +53,51 @@ const Journey = () => {
           <p className="text-muted-foreground mt-2">Scroll to ride along the neon road</p>
         </header>
 
-        <div className="relative rounded-xl p-6 overflow-hidden">
-          {/* Road */}
-          <div ref={trackRef} className="relative h-40 md:h-48">
-            <div className="absolute left-2 right-2 top-1/2 -translate-y-1/2 h-2 rounded-full bg-[hsl(var(--foreground)/0.15)]" />
-            <motion.div
-              style={{ x: bikeX }}
-              drag="x"
-              dragElastic={0.1}
-              dragMomentum={false}
-              dragConstraints={{ left: 0, right: Math.max(0, trackW - 64) }}
-              onDragEnd={handleDragEnd}
-              className="absolute left-2 top-1/2 -translate-y-1/2"
-              whileTap={{ scale: 0.98 }}
-            >
-              <div className="neon-ring rounded-full p-2 bg-[hsl(var(--background)/0.6)]">
-                <Bike />
-              </div>
-            </motion.div>
-          </div>
+        {/* Road */}
+        <div ref={trackRef} className="relative h-40 md:h-48 overflow-hidden">
+          <div className="absolute left-2 right-2 top-1/2 -translate-y-1/2 h-2 rounded-full bg-[hsl(var(--foreground)/0.15)]" />
+          <motion.div
+            style={{ x: bikeX }}
+            drag="x"
+            dragElastic={0.1}
+            dragMomentum={false}
+            dragConstraints={{ left: 0, right: Math.max(0, trackW - 64) }}
+            onDragEnd={handleDragEnd}
+            className="absolute left-2 top-1/2 -translate-y-1/2"
+            whileTap={{ scale: 0.98 }}
+          >
+            <div className="neon-ring rounded-full p-2 bg-[hsl(var(--background)/0.6)]">
+              <Bike />
+            </div>
+          </motion.div>
+        </div>
 
-          {/* Milestones */}
-          <div className="mt-6 grid grid-cols-1 md:grid-cols-5 gap-4">
-            {milestones.map((m, i) => (
-              <motion.article
-                key={m.year}
-                initial={{ y: 10, opacity: 0 }}
-                whileInView={{ y: 0, opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
-                onClick={() => snapTo(i)}
-                onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && snapTo(i)}
-                role="button"
-                tabIndex={0}
-                className={`glass rounded-lg p-4 text-center animate-float ${
-                  active === i ? "shadow-[0_0_24px_hsl(var(--primary)/0.35)]" : ""
-                }`}
-              >
-                <h3 className="font-medium tracking-wide">{m.year}</h3>
-                <p className="text-sm text-muted-foreground mt-1">{m.text}</p>
-                {active === i && (
-                  <motion.div initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} className="mt-2 text-xs text-primary/90">
-                    Reached: {m.year}
-                  </motion.div>
-                )}
-              </motion.article>
-            ))}
-          </div>
+        {/* Milestones */}
+        <div className="mt-6 grid grid-cols-1 md:grid-cols-5 gap-4">
+          {milestones.map((m, i) => (
+            <motion.article
+              key={m.year}
+              initial={{ y: 10, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              onClick={() => snapTo(i)}
+              onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && snapTo(i)}
+              role="button"
+              tabIndex={0}
+              className={`glass rounded-lg p-4 text-center animate-float ${
+                active === i ? "shadow-[0_0_24px_hsl(var(--primary)/0.35)]" : ""
+              }`}
+            >
+              <h3 className="font-medium tracking-wide">{m.year}</h3>
+              <p className="text-sm text-muted-foreground mt-1">{m.text}</p>
+              {active === i && (
+                <motion.div initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} className="mt-2 text-xs text-primary/90">
+                  Reached: {m.year}
+                </motion.div>
+              )}
+            </motion.article>
+          ))}
         </div>
       </section>
     </main>

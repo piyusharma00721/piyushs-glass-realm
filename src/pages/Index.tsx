@@ -165,9 +165,8 @@ const Index = () => {
           <p className="text-muted-foreground mt-2">Scroll to ride along the neon road</p>
         </header>
 
-        <div className="relative rounded-xl p-6 overflow-hidden">
           {/* Road */}
-          <div ref={trackRef} className="relative h-40 md:h-48">
+          <div ref={trackRef} className="relative h-40 md:h-48 overflow-hidden">
             <div className="absolute left-2 right-2 top-1/2 -translate-y-1/2 h-2 rounded-full bg-[hsl(var(--foreground)/0.15)]" />
             <motion.div
               style={{ x: bikeX }}
@@ -212,7 +211,6 @@ const Index = () => {
               </motion.article>
             ))}
           </div>
-        </div>
       </section>
 
       {/* Contact Section */}

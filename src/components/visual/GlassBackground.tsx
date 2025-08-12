@@ -12,6 +12,13 @@ const GlassBackground = ({ className = "" }: { className?: string }) => {
   const greenOrb = useRef<HTMLDivElement | null>(null);
   const yellowOrb = useRef<HTMLDivElement | null>(null);
 
+  const sizes = useMemo(() => ({
+    blue: 560,
+    red: 440,
+    green: 360,
+    yellow: 280,
+  }), []);
+
   useEffect(() => {
     let raf: number | null = null;
     const target = { x: 0, y: 0 };
@@ -62,11 +69,12 @@ const GlassBackground = ({ className = "" }: { className?: string }) => {
     const start = performance.now();
 
     // Randomized path params for each orb
+    const speedUp = 1.25; // ~25% faster
     const params = [
-      { el: blueOrb, ax: 0.35, ay: 0.28, sx: 0.00012, sy: 0.00016, px: Math.random() * Math.PI * 2, py: Math.random() * Math.PI * 2 },
-      { el: redOrb, ax: 0.30, ay: 0.34, sx: 0.00010, sy: 0.00014, px: Math.random() * Math.PI * 2, py: Math.random() * Math.PI * 2 },
-      { el: greenOrb, ax: 0.32, ay: 0.26, sx: 0.00014, sy: 0.00011, px: Math.random() * Math.PI * 2, py: Math.random() * Math.PI * 2 },
-      { el: yellowOrb, ax: 0.28, ay: 0.30, sx: 0.00011, sy: 0.00013, px: Math.random() * Math.PI * 2, py: Math.random() * Math.PI * 2 },
+      { el: blueOrb, size: sizes.blue, ax: 0.35, ay: 0.28, sx: 0.00012 * speedUp, sy: 0.00016 * speedUp, px: Math.random() * Math.PI * 2, py: Math.random() * Math.PI * 2 },
+      { el: redOrb, size: sizes.red, ax: 0.30, ay: 0.34, sx: 0.00010 * speedUp, sy: 0.00014 * speedUp, px: Math.random() * Math.PI * 2, py: Math.random() * Math.PI * 2 },
+      { el: greenOrb, size: sizes.green, ax: 0.32, ay: 0.26, sx: 0.00014 * speedUp, sy: 0.00011 * speedUp, px: Math.random() * Math.PI * 2, py: Math.random() * Math.PI * 2 },
+      { el: yellowOrb, size: sizes.yellow, ax: 0.28, ay: 0.30, sx: 0.00011 * speedUp, sy: 0.00013 * speedUp, px: Math.random() * Math.PI * 2, py: Math.random() * Math.PI * 2 },
     ];
 
     const loop = (t: number) => {
@@ -74,12 +82,11 @@ const GlassBackground = ({ className = "" }: { className?: string }) => {
       const h = window.innerHeight;
       const cx = w * 0.5;
       const cy = h * 0.5;
-      const size = 520; // orb size from CSS
 
       for (const p of params) {
         const time = t - start;
-        const x = cx + Math.sin(time * p.sx + p.px) * (w * p.ax) - size / 2;
-        const y = cy + Math.cos(time * p.sy + p.py) * (h * p.ay) - size / 2;
+        const x = cx + Math.sin(time * p.sx + p.px) * (w * p.ax) - (p.size / 2);
+        const y = cy + Math.cos(time * p.sy + p.py) * (h * p.ay) - (p.size / 2);
         const el = p.el.current;
         if (el) {
           el.style.transform = `translate3d(${x.toFixed(2)}px, ${y.toFixed(2)}px, 0)`;
@@ -102,16 +109,16 @@ const GlassBackground = ({ className = "" }: { className?: string }) => {
     >
       {/* Animated neon orbs on pure black background with parallax wrappers */}
       <div ref={blueWrap} style={{ position: "absolute", inset: 0 }}>
-        <div ref={blueOrb} className="orb orb--blue" style={{ animation: "none" }} />
+        <div ref={blueOrb} className="orb orb--blue" style={{ animation: "none", width: `${sizes.blue}px`, height: `${sizes.blue}px` }} />
       </div>
       <div ref={redWrap} style={{ position: "absolute", inset: 0 }}>
-        <div ref={redOrb} className="orb orb--red" style={{ animation: "none" }} />
+        <div ref={redOrb} className="orb orb--red" style={{ animation: "none", width: `${sizes.red}px`, height: `${sizes.red}px` }} />
       </div>
       <div ref={greenWrap} style={{ position: "absolute", inset: 0 }}>
-        <div ref={greenOrb} className="orb orb--green" style={{ animation: "none" }} />
+        <div ref={greenOrb} className="orb orb--green" style={{ animation: "none", width: `${sizes.green}px`, height: `${sizes.green}px` }} />
       </div>
       <div ref={yellowWrap} style={{ position: "absolute", inset: 0 }}>
-        <div ref={yellowOrb} className="orb orb--yellow" style={{ animation: "none" }} />
+        <div ref={yellowOrb} className="orb orb--yellow" style={{ animation: "none", width: `${sizes.yellow}px`, height: `${sizes.yellow}px` }} />
       </div>
     </div>
   );
