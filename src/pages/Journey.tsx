@@ -53,7 +53,7 @@ const Journey = () => {
           <p className="text-muted-foreground mt-2">Scroll to ride along the neon road</p>
         </header>
 
-        <div className="relative glass rounded-xl p-6 overflow-hidden">
+        <div className="relative rounded-xl p-6 overflow-hidden">
           {/* Road */}
           <div ref={trackRef} className="relative h-40 md:h-48">
             <div className="absolute left-2 right-2 top-1/2 -translate-y-1/2 h-2 rounded-full bg-[hsl(var(--foreground)/0.15)]" />

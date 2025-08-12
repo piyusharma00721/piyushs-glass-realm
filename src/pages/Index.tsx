@@ -124,41 +124,37 @@ const Index = () => {
 
       {/* Projects Section */}
       <section id="projects" className="container mx-auto px-4 pb-20">
-        <div className="glass rounded-xl p-6">
-          <header className="mb-6 text-center">
-            <h2 className="font-display text-2xl tracking-wider">Projects</h2>
-            <p className="text-muted-foreground mt-2">Interactive glass cards with neon accents</p>
-          </header>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {visibleProjects.map((p) => (
-              <ProjectCard key={p.title} project={p} />
-            ))}
-          </div>
-          <div className="mt-6 flex justify-center">
-            <Button variant="glass" className="rounded-full" onClick={() => setShowAllProjects((v) => !v)}>
-              {showAllProjects ? "View less" : "View more"}
-            </Button>
-          </div>
+        <header className="mb-6 text-center">
+          <h2 className="font-display text-2xl tracking-wider">Projects</h2>
+          <p className="text-muted-foreground mt-2">Interactive glass cards with neon accents</p>
+        </header>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {visibleProjects.map((p) => (
+            <ProjectCard key={p.title} project={p} />
+          ))}
+        </div>
+        <div className="mt-6 flex justify-center">
+          <Button variant="glass" className="rounded-full" onClick={() => setShowAllProjects((v) => !v)}>
+            {showAllProjects ? "View less" : "View more"}
+          </Button>
         </div>
       </section>
 
       {/* Skills Section */}
       <section id="skills" className="container mx-auto px-4 pb-20">
-        <div className="glass rounded-xl p-6">
-          <header className="mb-6 text-center">
-            <h2 className="font-display text-2xl tracking-wider">Skills</h2>
-            <p className="text-muted-foreground mt-2">Three per row, expand for more</p>
-          </header>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {visibleSkills.map((s) => (
-              <SkillCard key={s} name={s} icon={skillIcon(s)} />
-            ))}
-          </div>
-          <div className="mt-6 flex justify-center">
-            <Button variant="glass" className="rounded-full" onClick={() => setShowAllSkills((v) => !v)}>
-              {showAllSkills ? "View less" : "View more"}
-            </Button>
-          </div>
+        <header className="mb-6 text-center">
+          <h2 className="font-display text-2xl tracking-wider">Skills</h2>
+          <p className="text-muted-foreground mt-2">Three per row, expand for more</p>
+        </header>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {visibleSkills.map((s) => (
+            <SkillCard key={s} name={s} icon={skillIcon(s)} />
+          ))}
+        </div>
+        <div className="mt-6 flex justify-center">
+          <Button variant="glass" className="rounded-full" onClick={() => setShowAllSkills((v) => !v)}>
+            {showAllSkills ? "View less" : "View more"}
+          </Button>
         </div>
       </section>
 
@@ -169,7 +165,7 @@ const Index = () => {
           <p className="text-muted-foreground mt-2">Scroll to ride along the neon road</p>
         </header>
 
-        <div className="relative glass rounded-xl p-6 overflow-hidden">
+        <div className="relative rounded-xl p-6 overflow-hidden">
           {/* Road */}
           <div ref={trackRef} className="relative h-40 md:h-48">
             <div className="absolute left-2 right-2 top-1/2 -translate-y-1/2 h-2 rounded-full bg-[hsl(var(--foreground)/0.15)]" />
